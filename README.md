@@ -124,6 +124,20 @@ Optional extras:
 
 ---
 
+## 📓 Example notebook
+
+**[`examples/quickstart.ipynb`](examples/quickstart.ipynb)** walks through every
+module on a real dataset, with outputs saved — open it on GitHub and the charts and
+styled tables render inline, no install needed.
+
+[![Open in nbviewer](https://img.shields.io/badge/Open%20in-nbviewer-F37726?style=for-the-badge&logo=jupyter&logoColor=white)](https://nbviewer.org/github/warsab/eda-toolkit/blob/main/examples/quickstart.ipynb)
+
+Charts are committed as static images so they survive GitHub's notebook renderer,
+which strips JavaScript. Run it locally — or via nbviewer above — for the fully
+interactive Plotly versions.
+
+---
+
 ## 📊 Example data
 
 The notebook in `examples/` uses the **Global AI Tools Landscape (2020–2026)**
