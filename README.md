@@ -124,6 +124,22 @@ Optional extras:
 
 ---
 
+## 📊 Example data
+
+The notebook in `examples/` uses the **Global AI Tools Landscape (2020–2026)**
+dataset by Rhythm Ghai, published on
+[Kaggle](https://www.kaggle.com/datasets/rhythmghai/global-ai-tools-landscape-2020-2026)
+under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) licence.
+
+Note that this dataset is **synthetically generated** and does not reflect
+real-world figures — it is used here only to demonstrate the library. Full
+provenance is in [`examples/data/README.md`](examples/data/README.md).
+
+---
+
 ## 📝 License
 
 MIT © 2025 Warrick Sabatta
+
+Library code only. Datasets under `examples/data/` are covered by their own
+licences — see the table linked above.
