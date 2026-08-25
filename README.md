@@ -1,82 +1,109 @@
-# 📊 FW Utils
+# eda-toolkit
 
-**Author:** Warrick Sabatta  
-**Version:** 0.1  
-**Description:**  
-A modular, user-friendly Python utility library for data analysts and data scientists 🧠.  
-It includes functions for data extraction, styling, visualization, and diagnostics — all in one compact package.
+A small Python helper library for **exploratory data analysis in notebooks**.
 
----
+When you first open an unfamiliar dataset you end up writing the same cells over and
+over — check what's missing, style a table so it's readable, plot a correlation
+matrix, hunt for outliers, find near-duplicate records. `eda-toolkit` wraps those into
+one-line calls so the notebook stays focused on the analysis instead of the
+boilerplate.
 
-## 📁 Project Structure
-```
-fw_utils/
-│
-├── extractors.py # 🔢 Functions to extract values (e.g., numbers from strings)
-├── styling.py # 🎨 DataFrame styling helpers
-├── visualization.py # 📈 Correlation, scatter, outliers, and dist plots
-├── diagnostics.py # 🧪 Missing value reporting and diagnostics
-└── init.py # Makes this a Python package  
-```
+Built on **pandas** and **Plotly**, and designed for Jupyter, VS Code notebooks,
+Microsoft Fabric, and Databricks.
 
 ---
 
-## 🚀 Installation
-
-### Option 1: Clone from GitHub
+## Installation
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/warsab/eda-toolkit.git
+cd eda-toolkit
 pip install -e .
 ```
 
-### Option 2: Copy into your project
-Just copy the fw_utils/ folder into your project and use it directly!  
+Fuzzy name matching needs one extra dependency:
 
-## 🧩 Usage Examples  
-# Importing functions from modules
-from fw_utils.extractors import extract_nr
-from fw_utils.styling import make_pretty, view_df
-from fw_utils.visualization import corr_plot, scatter_plot
-from fw_utils.diagnostics import missing_values
-
-# Example usage
+```bash
+pip install -e ".[fuzzy]"
 ```
-df['amount'] = df['description'].apply(extract_nr)  # Extract numbers from text
-make_pretty(df)                                     # Style a table
-corr_plot(df)                                       # Show correlation matrix
-missing_values(df)                                  # See missing data summary
+
+Or just copy the `eda_toolkit/` folder into your project and import it directly.
+
+---
+
+## Modules
+
+| Module | What it does |
+|---|---|
+| `diagnostics` | Missing-value summary: count, percentage, and dtype per column, rendered as a Plotly table |
+| `visualization` | Correlation heatmap, scatter plots with OLS trendlines, and an outlier box-plot explorer with a feature slider |
+| `styling` | Styled DataFrame previews — captions, highlighted min/max, heatmaps, and inline bars |
+| `extractors` | Pull numeric values out of messy text columns |
+| `name_matching` | Find exact and fuzzy duplicate name pairs in a DataFrame |
+
+---
+
+## Usage
+
+```python
+import pandas as pd
+from eda_toolkit.diagnostics import missing_values
+from eda_toolkit.visualization import corr_plot, scatter_plot, outliers_plot
+from eda_toolkit.styling import make_pretty, view_df
+from eda_toolkit.extractors import extract_nr
+from eda_toolkit.name_matching import find_fuzzy_name_duplicates
+
+df = pd.read_csv("data.csv")
+
+# 1. What am I working with?
+missing_values(df)                       # missing counts, % and dtypes
+make_pretty(df, set_caption="Raw data")  # readable styled preview
+
+# 2. Clean up
+df["amount"] = df["description"].apply(extract_nr)   # "R 1 200" -> 1200
+
+# 3. Explore
+corr_plot(df)                                    # correlation heatmap
+scatter_plot(df, target="price", columns=["area", "rooms"])
+outliers_plot(df)                                # box plots, slider per feature
+
+# 4. Inspect specific columns
+view_df(df, column="price", focus="max")         # top rows, max highlighted
+view_df(df, column="price", focus="heatmap")     # gradient-shaded
+
+# 5. Data quality
+find_fuzzy_name_duplicates(df, score_cutoff=90)  # near-duplicate names
 ```
-## 📦 Dependencies
-Make sure you have these packages installed (automatically handled with pip install -e .):
-- pandas
-- numpy
-- plotly
-- IPython
 
-Optional for diagnostics:
-- matplotlib
-- seaborn
-- scikit-learn
+### `view_df` focus modes
 
-## 🖼 Logo Support
-Some functions (e.g., scatter_plot, missing_values, etc.) accept a logo_path parameter.
+`focus` accepts `"max"`, `"min"`, `"null"`, `"heatmap"`, or `"bar"` — each applies a
+different pandas Styler treatment to the sorted result.
 
-To include your brand/logo:
-```
-scatter_plot(df, target="price", columns=["area"], logo_path="logo.png")
+---
 
-```
-## 💡 Why Use FW Utils?
-- Modular and easy to use
-- Jupyter/Fabric/Databricks/VSC notebook–friendly
-- Visual-first: leverages Plotly and Pandas styling
-- Boost your analysis & reporting with clean, consistent visuals
+## Dependencies
 
-## 👨‍💻 Contributing
-Pull requests are welcome! Feel free to fork and enhance the tool with new modules or fixes.  
+Installed automatically with `pip install -e .`:
 
-## 📝 License
-MIT License © 2025 Warrick Sabatta
+- `pandas`, `numpy`, `plotly`, `IPython`
 
+Optional:
+
+- `rapidfuzz` — for `name_matching.find_fuzzy_name_duplicates` (falls back to
+  `fuzzywuzzy` if `rapidfuzz` isn't available)
+
+---
+
+## Notes
+
+- Plot functions call `fig.show()` directly, so they render inline in a notebook
+  rather than returning a figure object.
+- `find_fuzzy_name_duplicates` compares every pair of rows — O(n²). Pre-filter large
+  datasets before calling it.
+
+---
+
+## License
+
+MIT © 2025 Warrick Sabatta

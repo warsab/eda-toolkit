@@ -1,6 +1,6 @@
 """
-name_match_utils.py
-~~~~~~~~~~~~~~~~~~~
+name_matching.py
+~~~~~~~~~~~~~~~~
 
 Utility functions for detecting duplicate name pairs in a Pandas DataFrame.
 
@@ -12,7 +12,7 @@ Dependencies
 Example
 -------
 >>> import pandas as pd
->>> from name_match_utils import find_exact_name_duplicates
+>>> from eda_toolkit.name_matching import find_exact_name_duplicates
 >>>
 >>> df = pd.DataFrame({
 ...     "FirstName": ["Norman", "norman", "Alice", "Bob"],
