@@ -36,10 +36,12 @@ cd eda-toolkit
 pip install -e .
 ```
 
-Fuzzy name matching needs one extra dependency:
+Optional extras:
 
 ```bash
-pip install -e ".[fuzzy]"
+pip install -e ".[fuzzy]"     # rapidfuzz, for fuzzy name matching
+pip install -e ".[parquet]"   # pyarrow, to read .parquet files
+pip install -e ".[all]"       # everything, incl. the example notebook
 ```
 
 Or just copy the `eda_toolkit/` folder into your project and import it directly.
@@ -103,10 +105,13 @@ Installed automatically with `pip install -e .`:
 
 - `pandas`, `numpy`, `plotly`, `IPython`
 
-Optional:
+Optional extras:
 
-- `rapidfuzz` — for `name_matching.find_fuzzy_name_duplicates` (falls back to
-  `fuzzywuzzy` if `rapidfuzz` isn't available)
+| Extra | Package | Needed for |
+|---|---|---|
+| `[fuzzy]` | `rapidfuzz` | `name_matching.find_fuzzy_name_duplicates` (falls back to `fuzzywuzzy` if absent) |
+| `[parquet]` | `pyarrow` | Reading `.parquet` datasets, including the example notebook |
+| `[all]` | both | Everything |
 
 ---
 
