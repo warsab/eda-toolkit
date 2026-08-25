@@ -1,6 +1,22 @@
-# eda-toolkit
+<div align="center">
+
+# 🔍 eda-toolkit
+
+### *Stop rewriting the same first ten cells.*
 
 A small Python helper library for **exploratory data analysis in notebooks**.
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com/python/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+<sub>Works in **Jupyter** · **VS Code** · **Microsoft Fabric** · **Databricks**</sub>
+
+</div>
+
+---
 
 When you first open an unfamiliar dataset you end up writing the same cells over and
 over — check what's missing, style a table so it's readable, plot a correlation
@@ -8,12 +24,11 @@ matrix, hunt for outliers, find near-duplicate records. `eda-toolkit` wraps thos
 one-line calls so the notebook stays focused on the analysis instead of the
 boilerplate.
 
-Built on **pandas** and **Plotly**, and designed for Jupyter, VS Code notebooks,
-Microsoft Fabric, and Databricks.
+Built on **pandas** and **Plotly**.
 
 ---
 
-## Installation
+## ⚡ Installation
 
 ```bash
 git clone https://github.com/warsab/eda-toolkit.git
@@ -31,7 +46,7 @@ Or just copy the `eda_toolkit/` folder into your project and import it directly.
 
 ---
 
-## Modules
+## 📦 Modules
 
 | Module | What it does |
 |---|---|
@@ -43,7 +58,7 @@ Or just copy the `eda_toolkit/` folder into your project and import it directly.
 
 ---
 
-## Usage
+## 🚀 Usage
 
 ```python
 import pandas as pd
@@ -82,7 +97,7 @@ different pandas Styler treatment to the sorted result.
 
 ---
 
-## Dependencies
+## 🧩 Dependencies
 
 Installed automatically with `pip install -e .`:
 
@@ -95,7 +110,7 @@ Optional:
 
 ---
 
-## Notes
+## ⚠️ Notes
 
 - Plot functions call `fig.show()` directly, so they render inline in a notebook
   rather than returning a figure object.
@@ -104,6 +119,6 @@ Optional:
 
 ---
 
-## License
+## 📝 License
 
 MIT © 2025 Warrick Sabatta
